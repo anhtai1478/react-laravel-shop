@@ -25,21 +25,21 @@ function Showproduct() {
             });
     }, []);
 
-    // Hàm thêm vào giỏ hàng theo cấu trúc Object { id: qty }
+   
     function addToCart(e, id) {
         e.preventDefault();
 
         let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
         if (cart[id]) {
-            // Nếu ĐÃ CÓ: tăng số lượng lên 1 (Phải cộng số, KHÔNG ĐƯỢC cộng chuỗi)
+            // Nếu ĐÃ CÓ: tăng số lượng lên 1 
             cart[id] = Number(cart[id]) + 1;
         } else {
             // Nếu CHƯA CÓ: đặt mặc định số lượng ban đầu là 1
             cart[id] = 1;
         }
 
-        // 3. Lưu ngược lại vào localStorage dưới dạng chuỗi JSON hợp lệ
+        // 3. Lưu ngược lại vào localStorage 
         localStorage.setItem("cart", JSON.stringify(cart));
 
         console.log("Giỏ hàng hiện tại :", cart);
