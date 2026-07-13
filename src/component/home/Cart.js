@@ -29,17 +29,28 @@ function Cart() {
             .catch((err) => {
                 console.log(err);
             });
-    }, []); 
+    }, []);
 
     // Hàm Tăng số lượng (+)
     function handleIncrement(id) {
+
+        // Dùng map để cập nhật số lượng sản phẩm trong danh sách hiển thị (Vì muốn thay đổi 1 phần tử trong mảng products)
+       let newProducts = products.map((item) => {
+            if (item.id === id) {
+                return { ...item, quantity: (cartState[id] || 0) + 1 };
+            }
+            return item;
+        });
+
+        console.log("Giỏ hàng hiện tại :", newProducts);
+
+        setProducts(newProducts);
+
         let updatedCart = { ...cartState };
         updatedCart[id] = (updatedCart[id] || 0) + 1;
 
-        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        localStorage.setItem("cart", JSON.stringify(newProducts));
         setCartState(updatedCart); // Cập nhật state 
-
-        
     }
 
     // Hàm Giảm số lượng (-)
@@ -117,7 +128,7 @@ function Cart() {
                                                 </button>
                                             </div>
                                         </td>
-                                        <td  className="fw-bold text-danger">
+                                        <td className="fw-bold text-danger">
                                             ${item.price * qty}
                                         </td>
                                         <td style={{ verticalAlign: "middle" }}>
