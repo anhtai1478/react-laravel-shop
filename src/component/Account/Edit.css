@@ -1,0 +1,249 @@
+/* Toàn bộ giao diện bọc ngoài giống Hình 1 */
+.edit-product-container {
+    font-family: Arial, sans-serif;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.edit-product-title {
+    font-size: 28px;
+    font-weight: normal;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Định dạng tất cả các ô input văn bản, number, select và textarea */
+.edit-product-input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    background-color: #f2f0eb;
+    /* Màu nền xám ngả kem nhạt chuẩn Hình 1 */
+    border: none;
+    border-radius: 2px;
+    font-size: 15px;
+    color: #555;
+    box-sizing: border-box;
+    outline: none;
+    display: block;
+}
+
+/* Custom riêng cho ô textarea */
+textarea.edit-product-input {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Bọc vùng chọn file ảnh để đồng bộ thanh dài full-width */
+.file-upload-wrapper {
+    background-color: #f2f0eb;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+
+/* Danh sách ảnh hiện tại kèm ô checkbox */
+.image-preview-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+}
+
+.image-preview-item {
+    margin-right: 15px;
+    text-align: center;
+}
+
+.image-preview-item img {
+    object-fit: cover;
+    border: 1px solid #ddd;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.image-checkbox {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* Nút bấm Update chuẩn giao diện */
+.btn-submit-update {
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+
+.btn-submit-update:hover {
+    background-color: #ebebeb;
+}
+
+.image-list {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.image-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-image {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    padding: 2px;
+    margin-bottom: 5px;
+}
+
+.image-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+.preview-new-images {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.preview-new-images img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    padding: 2px;
+}
+
+.image-item {
+    position: relative;
+    display: inline-block;
+}
+
+.image-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.image-item {
+    position: relative;
+    display: inline-block;
+}
+
+.product-image {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+
+/* Khung chứa toàn bộ danh sách hình ảnh */
+.image-list {
+    display: flex;
+    /* Kích hoạt flexbox để xếp các phần tử nằm ngang */
+    flex-wrap: wrap;
+    /* Tự động xuống dòng nếu danh sách ảnh bị quá dài */
+    gap: 20px;
+    /* Khoảng cách giữa các cụm ảnh với nhau */
+    padding: 0;
+    margin: 15px 0;
+    list-style-type: none;
+    /* Xóa dấu chấm tròn mặc định của thẻ ul/li */
+}
+
+/* Cụm bao gồm 1 ảnh + 1 checkbox */
+.image-item {
+    display: flex;
+    flex-direction: column;
+    /* Xếp các phần tử bên trong li theo chiều dọc */
+    align-items: center;
+    /* Căn giữa ảnh và checkbox theo trục dọc */
+    width: 80px;
+    /* Đặt chiều rộng cố định cho mỗi cụm ảnh */
+}
+
+/* Định dạng cho hình ảnh */
+.product-image {
+    width: 80px;
+    /* Chiều rộng bằng khung chứa */
+    height: 80px;
+    /* Chiều cao bằng khung chứa để tạo thành hình vuông */
+    object-fit: cover;
+    /* Giữ nguyên tỉ lệ ảnh mà không bị méo */
+    border: 1px solid #ddd;
+    /* Viền nhẹ xung quanh ảnh */
+    border-radius: 4px;
+    /* Bo góc nhẹ cho giống các trang thương mại điện tử */
+    margin-bottom: 8px;
+    /* Tạo khoảng cách nhỏ giữa ảnh và checkbox bên dưới */
+}
+
+/* Định dạng cho ô checkbox */
+.image-item input[type="checkbox"] {
+    width: 18px;
+    /* Chỉnh độ lớn của ô checkbox cho dễ bấm */
+    height: 18px;
+    cursor: pointer;
+    /* Thay đổi con trỏ chuột thành hình bàn tay khi di chuột vào */
+}
+
+/* Nhãn chữ "New" cho ảnh mới (nếu cần) */
+.new-image {
+    font-size: 12px;
+    color: #5cb85c;
+    margin-top: 4px;
+    font-weight: bold;
+}
+
+/* Thêm thuộc tính này để định vị nút bấm theo khung của li */
+.image-item {
+    position: relative;
+    /* Cực kỳ quan trọng để nút X căn theo khung này */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+}
+
+/* Định dạng nút Xóa (X) */
+.btn-delete-img {
+    position: absolute;
+    top: -5px;
+    /* Đẩy lên mép trên ảnh */
+    right: -5px;
+    /* Đẩy sang mép phải ảnh */
+    width: 20px;
+    height: 20px;
+    background-color: #ff4d4f;
+    /* Màu nền đỏ */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    /* Tạo nút hình tròn */
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    transition: background-color 0.2s;
+}
+
+.btn-delete-img:hover {
+    background-color: #ff7875;
+    /* Đổi màu nhẹ khi di chuột vào */
+}

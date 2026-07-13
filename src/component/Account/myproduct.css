@@ -1,0 +1,91 @@
+
+
+
+
+.my-products-container {
+    
+    padding: 0 15px;
+    margin-bottom: 50px;
+}
+
+/* Tiêu đề "MY PRODUCT" màu cam nhỏ gọn */
+.my-products-container h2.title {
+    color: #FE980F;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 10px 0 25px;
+    text-transform: uppercase;
+}
+
+/* Định dạng bảng thon gọn */
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    font-size: 14px; /* Thu nhỏ cỡ chữ toàn bảng */
+}
+
+/* Thanh tiêu đề màu cam của bảng */
+.product-table thead tr.cart_menu {
+    background: #FE980F;
+    color: #fff;
+}
+
+.product-table th {
+    padding: 10px;
+    font-weight: 600;
+    border: none;
+    text-transform: capitalize;
+}
+
+.product-table td {
+    padding: 8px 10px; /* Thu hẹp khoảng cách đệm trên dưới */
+    vertical-align: middle;
+    border-bottom: 1px solid #F7F7F0;
+    color: #696763;
+}
+
+/* Định dạng thẻ ảnh hiển thị trong bảng không bị to quá đà */
+.product-table td img {
+    width: 60px !important;    /* Khống chế chiều rộng ảnh cố định */
+    height: 50px !important;   /* Khống chế chiều cao ảnh cố định */
+    object-fit: cover;         /* Giúp ảnh không bị méo tỷ lệ */
+    border: 1px solid #e1e1e1;
+    padding: 2px;
+    background: #fff;
+}
+
+/* Nút bấm hành động (Sửa/Xóa) nhỏ xinh */
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.action-buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px;
+}
+
+/* Màu sắc icon nút bấm */
+.edit-btn { color: #428bca; }
+.delete-btn { color: #ff4d4d; }
+
+/* Nút Add New */
+.add-new-btn {
+    background: #FE980F;
+    border: none;
+    color: #FFFFFF;
+    font-size: 14px;
+    padding: 6px 15px;
+    cursor: pointer;
+    border-radius: 0;
+    font-weight: normal;
+}
+.add-new-btn:hover {
+    background: #e08206;
+    color: #fff;
+}
