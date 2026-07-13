@@ -15,7 +15,7 @@ function Cart() {
             },
         };
 
-        // Lấy giỏ hàng tại thời điểm vào trang để gọi API (Chỉ chạy 1 lần duy nhất)
+        // Lấy giỏ hàng tại thời điểm vào trang để gọi API
         let currentCart = JSON.parse(localStorage.getItem("cart")) || {};
 
         axios.post(
@@ -29,7 +29,7 @@ function Cart() {
             .catch((err) => {
                 console.log(err);
             });
-    }, []); // Để mảng rỗng để tránh lặp gọi API vô hạn
+    }, []); 
 
     // Hàm Tăng số lượng (+)
     function handleIncrement(id) {
@@ -37,10 +37,9 @@ function Cart() {
         updatedCart[id] = (updatedCart[id] || 0) + 1;
 
         localStorage.setItem("cart", JSON.stringify(updatedCart));
-        setCartState(updatedCart); // Cập nhật state để UI thay đổi số lượng & tổng tiền ngay lập tức
+        setCartState(updatedCart); // Cập nhật state 
 
-        // Thông báo cho Header cập nhật lại số lượng tổng trên Menu
-        window.dispatchEvent(new Event("cartUpdated"));
+        
     }
 
     // Hàm Giảm số lượng (-)
