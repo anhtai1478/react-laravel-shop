@@ -67,10 +67,8 @@ function Productdetail() {
                 <div className="row">
 
 
-                    {/* CỘT NỘI DUNG CHÍNH BÊN PHẢI */}
                     <div className="col-sm-9 padding-right">
 
-                        {/* PRODUCT DETAILS */}
                         <div className="product-details">
                             <div className="col-sm-5">
                                 {mainImage && (
