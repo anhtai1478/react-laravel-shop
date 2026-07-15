@@ -34,28 +34,34 @@ function Cart() {
     // Hàm Tăng số lượng (+)
     function handleIncrement(id) {
 
-        // Cập nhật giỏ hàng
-        let updatedCart = { ...cartState };
-        updatedCart[id] = (updatedCart[id] || 0) + 1;
-
-        // Lưu localStorage
-        localStorage.setItem("cart", JSON.stringify(updatedCart));
-
-        // Cập nhật state
-        setCartState(updatedCart);
-        
-        //Danh sách sản phẩm hiển thị
+        // 1. Duyệt danh sách sản phẩm
         let newProducts = products.map((item) => {
+
+            // 2. Kiểm tra id
             if (item.id === id) {
 
-                return { ...item, qty: updatedCart[id], };
+                return {...item, qty: item.qty + 1}; 
             }
+
             return item;
         });
 
+        console.log("Danh sách sản phẩm: ", newProducts);
 
-        console.log("Giỏ hàng hiện tại :", newProducts);
         setProducts(newProducts);
+
+        // 6. Cập nhật localStorage
+        let updatedCart = { ...cartState };
+
+        if (updatedCart[id]) {
+            updatedCart[id] += 1;
+        } else {
+            updatedCart[id] = 1;
+        }
+
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+        setCartState(updatedCart);
     }
 
     // Hàm Giảm số lượng (-)
