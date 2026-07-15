@@ -38,18 +38,18 @@ function Cart() {
        let newProducts = products.map((item) => {
             if (item.id === id) {
                 return { ...item, qty: (item.qty || 0) + 1 };
+
             }
             return item;
-        });
-
+        });     
         console.log("Giỏ hàng hiện tại :", newProducts);
         setProducts(newProducts);
         
-
+        
         let updatedCart = { ...cartState };
         updatedCart[id] = (updatedCart[id] || 0) + 1;
 
-        localStorage.setItem("cart", JSON.stringify(newProducts));
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
         setCartState(updatedCart); // Cập nhật state 
     }
 
