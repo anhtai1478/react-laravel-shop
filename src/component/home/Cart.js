@@ -55,9 +55,7 @@ function Cart() {
 
         if (updatedCart[id]) {
             updatedCart[id] += 1;
-        } else {
-            updatedCart[id] = 1;
-        }
+        } 
 
         localStorage.setItem("cart", JSON.stringify(updatedCart));
 
