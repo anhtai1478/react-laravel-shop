@@ -34,17 +34,17 @@ function Cart() {
     // Hàm Tăng số lượng (+)
     function handleIncrement(id) {
 
-        // Dùng map để cập nhật số lượng sản phẩm trong danh sách hiển thị (Vì muốn thay đổi 1 phần tử trong mảng products)
+        // Dùng map để cập nhật số lượng sản phẩm (Vì muốn thay đổi 1 phần tử trong mảng products)
        let newProducts = products.map((item) => {
             if (item.id === id) {
-                return { ...item, quantity: (cartState[id] || 0) + 1 };
+                return { ...item, qty: (cartState[id] || 0) + 1 };
             }
             return item;
         });
 
         console.log("Giỏ hàng hiện tại :", newProducts);
-
         setProducts(newProducts);
+        
 
         let updatedCart = { ...cartState };
         updatedCart[id] = (updatedCart[id] || 0) + 1;
