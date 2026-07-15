@@ -37,7 +37,7 @@ function Cart() {
         // Dùng map để cập nhật số lượng sản phẩm (Vì muốn thay đổi 1 phần tử trong mảng products)
        let newProducts = products.map((item) => {
             if (item.id === id) {
-                return { ...item, qty: (cartState[id] || 0) + 1 };
+                return { ...item, qty: (item.qty || 0) + 1 };
             }
             return item;
         });
