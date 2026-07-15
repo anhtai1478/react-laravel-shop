@@ -43,7 +43,8 @@ function Cart() {
 
         // Cập nhật state
         setCartState(updatedCart);
-
+        
+        //Danh sách sản phẩm hiển thị
         let newProducts = products.map((item) => {
             if (item.id === id) {
 
