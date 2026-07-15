@@ -34,10 +34,10 @@ function Cart() {
     // Hàm Tăng số lượng (+)
     function handleIncrement(id) {
 
-        // 1. Duyệt danh sách sản phẩm
+        
         let newProducts = products.map((item) => {
 
-            // 2. Kiểm tra id
+            //  Kiểm tra id
             if (item.id === id) {
 
                 return {...item, qty: item.qty + 1}; 
@@ -50,7 +50,7 @@ function Cart() {
 
         setProducts(newProducts);
 
-        // 6. Cập nhật localStorage
+        //  Cập nhật localStorage
         let updatedCart = { ...cartState };
 
         if (updatedCart[id]) {
