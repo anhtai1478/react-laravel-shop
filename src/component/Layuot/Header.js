@@ -1,11 +1,14 @@
 import { useNavigate, Link } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../home/Cartcontext";
+
 
 const Header = () => {
 	const navigate = useNavigate();
+	const { cartItems } = useContext(CartContext);
 
 	// Kiểm tra đã đăng nhập chưa 
 	const isLoggedIn = localStorage.getItem("isLoggedIn");
-
 	
 
 	const handleLogout = (e) => {
@@ -109,7 +112,7 @@ const Header = () => {
 									<li><a href="/account"><i className="fa fa-user"></i> Account</a></li>
 									<li><a href="/showproduct"><i className="fa fa-star"></i> Wishlist</a></li>
 									<li><a href="checkout.html"><i className="fa fa-crosshairs"></i> Checkout</a></li>
-									<li><a href="/cart"><i className="fa fa-shopping-cart"></i> Cart</a></li>
+									<li><a href="/cart"><i className="fa fa-shopping-cart"></i> Cart ({cartItems})</a></li>
 									
 									<li><a href="/register"><i className="fa fa-lock"></i> register</a></li>
 									{renderLogin()}

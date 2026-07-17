@@ -1,9 +1,11 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "./Cartcontext";
 
 function Showproduct() {
     const [product, setProduct] = useState([]);
+    const { updateCart} = useContext(CartContext);
 
     useEffect(() => {
         let token = localStorage.getItem('token');
@@ -41,7 +43,9 @@ function Showproduct() {
 
         // 3. Lưu ngược lại vào localStorage 
         localStorage.setItem("cart", JSON.stringify(cart));
+        // Cập nhật lại số lượng giỏ hàng trong context
 
+        updateCart();
         console.log("Giỏ hàng hiện tại :", cart);
     }
 

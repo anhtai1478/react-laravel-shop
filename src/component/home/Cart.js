@@ -1,9 +1,13 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CartContext } from "./Cartcontext";
 
 function Cart() {
     const [products, setProducts] = useState([]);
     const [cartState, setCartState] = useState(JSON.parse(localStorage.getItem("cart")) || {});
+    const { updateCart } = useContext(CartContext);
+
+
 
     useEffect(() => {
         let token = localStorage.getItem("token");
@@ -60,6 +64,7 @@ function Cart() {
         localStorage.setItem("cart", JSON.stringify(updatedCart));
 
         setCartState(updatedCart);
+        updateCart();
     }
 
     // Hàm Giảm số lượng (-)
@@ -76,7 +81,7 @@ function Cart() {
 
         localStorage.setItem("cart", JSON.stringify(updatedCart));
         setCartState(updatedCart);
-        window.dispatchEvent(new Event("cartUpdated"));
+        updateCart();
     }
 
     // Hàm Xóa sản phẩm (Delete)
@@ -87,7 +92,7 @@ function Cart() {
         localStorage.setItem("cart", JSON.stringify(updatedCart));
         setCartState(updatedCart);
         setProducts(products.filter(item => item.id !== id));
-        window.dispatchEvent(new Event("cartUpdated"));
+        updateCart();
     }
 
     // Tính tổng tiền giỏ hàng realtime
