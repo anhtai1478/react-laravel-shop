@@ -10,8 +10,11 @@ export function CartProvider({ children }) {
 
         let totalItems = 0;
 
+
+        // duyệt qua từng sản phẩm trong giỏ hàng và tính tổng số lượng
         for (const id in cart) {
             totalItems += cart[id];
+            console.log("Sản phẩm ID:", id, "Số lượng:", cart[id]);
         }
 
         setCartItems(totalItems);
