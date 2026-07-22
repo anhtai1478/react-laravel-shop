@@ -3,13 +3,12 @@ import './App.css';
 import Footer from './component/Layuot/Footer';
 import Header from './component/Layuot/Header';
 import MenuLeft from './component/Layuot/Menuleft';
-import { CartProvider } from './component/home/Cartcontext';
 function App(props) {
   const location = useLocation();
   const currentPath = location.pathname.toLowerCase();
 
   return (
-    <CartProvider>
+    <>
       <Header />
 
       <section>
@@ -30,7 +29,8 @@ function App(props) {
       </section>
 
       <Footer />
-    </CartProvider>
+    </>
+
   );
 }
 

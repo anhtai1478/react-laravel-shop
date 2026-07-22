@@ -1,12 +1,10 @@
 import { useNavigate, Link } from "react-router-dom";
-import { useContext } from "react";
-import { CartContext } from "../home/Cartcontext";
-
+import {useSelector} from "react-redux";
 
 const Header = () => {
 	const navigate = useNavigate();
-	const { cartItems } = useContext(CartContext);
-
+	// Lấy số lượng từ Redux
+	const cartItems = useSelector((state) => state.cartItems);
 	// Kiểm tra đã đăng nhập chưa 
 	const isLoggedIn = localStorage.getItem("isLoggedIn");
 	

@@ -20,28 +20,32 @@ import Showproduct from './component/home/Showproduct';
 import Addtocart from './component/home/Addtocart';
 import Productdetail from './component/home/Productdetail';
 import Cart from './component/home/Cart';
+import { Provider } from 'react-redux';
+import store from './component/home/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Router>
-    <App>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blogdetail/:id" element={<BlogDetail />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Register" element={<Register />} />
-        <Route path="/account" element={<Update />} />
-        <Route path="/myproduct" element={<Myproduct />} />
-        <Route path="/addproduct" element={<Addproduct />} />
-        <Route path="/edit-product/:id" element={<Edit />} />
-        <Route path='/showproduct' element={<Showproduct />} />
-        <Route path='/add-cart' element={<Addtocart />} />
-        <Route path="/productdetail/:id" element={<Productdetail />} />
-        <Route path="/cart" element={<Cart />} />
-      </Routes>
-    </App>
-  </Router>
+  <Provider store={store}>
+    <Router>
+      <App>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blogdetail/:id" element={<BlogDetail />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
+          <Route path="/account" element={<Update />} />
+          <Route path="/myproduct" element={<Myproduct />} />
+          <Route path="/addproduct" element={<Addproduct />} />
+          <Route path="/edit-product/:id" element={<Edit />} />
+          <Route path='/showproduct' element={<Showproduct />} />
+          <Route path='/add-cart' element={<Addtocart />} />
+          <Route path="/productdetail/:id" element={<Productdetail />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </App>
+    </Router>
+  </Provider>
 );
 
 reportWebVitals();

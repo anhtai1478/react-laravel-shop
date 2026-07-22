@@ -130,7 +130,9 @@ function Edit() {
             setAvatarCheckBox(prev => [...prev, img]);
         }else{
             const newAvatarCheckBox =avatarCheckBox.filter(item => item !== img);
+
             setAvatarCheckBox(newAvatarCheckBox);
+            
             console.log(newAvatarCheckBox);
         }
 
@@ -177,9 +179,7 @@ function Edit() {
 
     let imgArr = [];
     if (product.image) {
-        imgArr = Array.isArray(product.image)
-            ? product.image
-            : JSON.parse(product.image);
+        imgArr = Array.isArray(product.image)? product.image:JSON.parse(product.image);
     }
 
     return (

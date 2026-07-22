@@ -1,13 +1,27 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import { CartContext } from "./Cartcontext";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 function Cart() {
     const [products, setProducts] = useState([]);
     const [cartState, setCartState] = useState(JSON.parse(localStorage.getItem("cart")) || {});
-    const { updateCart } = useContext(CartContext);
 
+    // Redux
+    const dispatch = useDispatch();
 
+    // Cập nhật số lượng lên Redux
+    function updateRedux(cart) {
+        let total = 0;
+
+        for (const id in cart) {
+            total += cart[id];
+        }
+
+        dispatch({
+            type: "UPDATE_CART",
+            payload: total,
+        });
+    }
 
     useEffect(() => {
         let token = localStorage.getItem("token");
@@ -21,6 +35,9 @@ function Cart() {
 
         // Lấy giỏ hàng tại thời điểm vào trang để gọi API
         let currentCart = JSON.parse(localStorage.getItem("cart")) || {};
+
+        // Cập nhật Redux khi mở trang
+        updateRedux(currentCart);
 
         axios.post(
             "http://localhost/laravel8/laravel8/laravel8/public/api/product/cart",
@@ -38,13 +55,12 @@ function Cart() {
     // Hàm Tăng số lượng (+)
     function handleIncrement(id) {
 
-        
         let newProducts = products.map((item) => {
 
             //  Kiểm tra id
             if (item.id === id) {
 
-                return {...item, qty: item.qty + 1}; 
+                return { ...item, qty: item.qty + 1 };
             }
 
             return item;
@@ -59,16 +75,19 @@ function Cart() {
 
         if (updatedCart[id]) {
             updatedCart[id] += 1;
-        } 
+        }
 
         localStorage.setItem("cart", JSON.stringify(updatedCart));
 
         setCartState(updatedCart);
-        updateCart();
+
+        // Cập nhật Redux
+        updateRedux(updatedCart);
     }
 
     // Hàm Giảm số lượng (-)
     function handleDecrement(id) {
+
         let updatedCart = { ...cartState };
 
         if (updatedCart[id] > 1) {
@@ -80,8 +99,11 @@ function Cart() {
         }
 
         localStorage.setItem("cart", JSON.stringify(updatedCart));
+
         setCartState(updatedCart);
-        updateCart();
+
+        // Cập nhật Redux
+        updateRedux(updatedCart);
     }
 
     // Hàm Xóa sản phẩm (Delete)
@@ -92,7 +114,9 @@ function Cart() {
         localStorage.setItem("cart", JSON.stringify(updatedCart));
         setCartState(updatedCart);
         setProducts(products.filter(item => item.id !== id));
-        updateCart();
+
+        // Cập nhật Redux
+        updateRedux(updatedCart);
     }
 
     // Tính tổng tiền giỏ hàng realtime
@@ -123,9 +147,9 @@ function Cart() {
                                 const qty = cartState[item.id] || 0;
                                 return (
                                     <tr key={item.id}>
-                                        <td >{item.name}</td>
-                                        <td >{item.price}$</td>
-                                        <td >
+                                        <td>{item.name}</td>
+                                        <td>{item.price}$</td>
+                                        <td>
                                             <div className="d-flex justify-content-center align-items-center">
                                                 <button
                                                     className="btn btn-sm btn-outline-secondary me-2"
@@ -133,7 +157,11 @@ function Cart() {
                                                 >
                                                     -
                                                 </button>
-                                                <span className="fw-bold px-2">{qty}</span>
+
+                                                <span className="fw-bold px-2">
+                                                    {qty}
+                                                </span>
+
                                                 <button
                                                     className="btn btn-sm btn-outline-secondary ms-2"
                                                     onClick={() => handleIncrement(item.id)}
@@ -142,9 +170,11 @@ function Cart() {
                                                 </button>
                                             </div>
                                         </td>
+
                                         <td className="fw-bold text-danger">
                                             ${item.price * qty}
                                         </td>
+
                                         <td style={{ verticalAlign: "middle" }}>
                                             <button
                                                 className="btn btn-sm btn-danger"
@@ -153,6 +183,7 @@ function Cart() {
                                                 Delete
                                             </button>
                                         </td>
+
                                     </tr>
                                 );
                             })}
@@ -161,7 +192,12 @@ function Cart() {
 
                     <div className="d-flex justify-content-end mt-4">
                         <div className="card p-3" style={{ width: "300px" }}>
-                            <h5>Tổng cộng: <span className="text-danger fw-bold">${calculateTotalCart()}</span></h5>
+                            <h5>
+                                Tổng cộng:
+                                <span className="text-danger fw-bold">
+                                    ${calculateTotalCart()}
+                                </span>
+                            </h5>
                         </div>
                     </div>
                 </>

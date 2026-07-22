@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { CartContext } from "./Cartcontext";
+import { useDispatch } from "react-redux";
 
 function Showproduct() {
     const [product, setProduct] = useState([]);
-    const { updateCart} = useContext(CartContext);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         let token = localStorage.getItem('token');
@@ -27,25 +27,35 @@ function Showproduct() {
             });
     }, []);
 
-   
+
     function addToCart(e, id) {
         e.preventDefault();
 
         let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
         if (cart[id]) {
-            // Nếu ĐÃ CÓ: tăng số lượng lên 1 
+            // Nếu ĐÃ CÓ: tăng số lượng lên 1
             cart[id] = Number(cart[id]) + 1;
         } else {
             // Nếu CHƯA CÓ: đặt mặc định số lượng ban đầu là 1
             cart[id] = 1;
         }
 
-        // 3. Lưu ngược lại vào localStorage 
+        // 3. Lưu ngược lại vào localStorage
         localStorage.setItem("cart", JSON.stringify(cart));
-        // Cập nhật lại số lượng giỏ hàng trong context
 
-        updateCart();
+        let total = 0;
+
+        for (const itemId in cart) {
+            total += cart[itemId];
+        }
+
+        // Cập nhật Redux
+        dispatch({
+            type: "UPDATE_CART",
+            payload: total,
+        });
+
         console.log("Giỏ hàng hiện tại :", cart);
     }
 
@@ -73,7 +83,7 @@ function Showproduct() {
                                         <div className="col-sm-4" key={item.id || index}>
                                             <div className="product-image-wrapper">
                                                 <div className="single-products">
-                                                  
+
                                                     <div className="productinfo text-center">
                                                         <img src={imageUrl} alt={item.name} />
                                                         <h2>${item.price}</h2>
@@ -83,11 +93,11 @@ function Showproduct() {
                                                             className="btn btn-default add-to-cart"
                                                             onClick={(e) => addToCart(e, item.id)}
                                                         >
-                                                            <i className="fa fa-shopping-cart"></i>Add to cart
+                                                            <i className="fa fa-shopping-cart"></i>
+                                                            Add to cart
                                                         </a>
                                                     </div>
 
-                                                   
                                                     <div className="product-overlay">
                                                         <div className="overlay-content">
                                                             <h2>${item.price}</h2>
@@ -97,14 +107,22 @@ function Showproduct() {
                                                                 className="btn btn-default add-to-cart"
                                                                 onClick={(e) => addToCart(e, item.id)}
                                                             >
-                                                                <i className="fa fa-shopping-cart"></i>Add to cart
+                                                                <i className="fa fa-shopping-cart"></i>
+                                                                Add to cart
                                                             </a>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div className="choose">
                                                     <ul className="nav nav-pills nav-justified">
-                                                        <li><a href="#"><i className="fa fa-plus-square"></i>Add to wishlist</a></li>
+                                                        <li>
+                                                            <a href="#">
+                                                                <i className="fa fa-plus-square"></i>
+                                                                Add to wishlist
+                                                            </a>
+                                                        </li>
+
                                                         <li>
                                                             <Link to={`/productdetail/${item.id}`}>
                                                                 <i className="fa fa-plus-square"></i>
@@ -113,12 +131,15 @@ function Showproduct() {
                                                         </li>
                                                     </ul>
                                                 </div>
+
                                             </div>
                                         </div>
                                     );
                                 })
                             ) : (
-                                <p className="text-center">Không có sản phẩm nào hoặc chưa tải xong dữ liệu...</p>
+                                <p className="text-center">
+                                    Không có sản phẩm nào hoặc chưa tải xong dữ liệu...
+                                </p>
                             )}
                         </div>
                     </div>
